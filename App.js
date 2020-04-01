@@ -10,6 +10,7 @@ import HomeScreen from './src/Components/HomeScreen';
 import DetailScreen from './src/Components/DetailScreen';
 import SignInScreen from './src/Components/SignIn';
 import SplashScreen from './src/Components/splashScreen';
+import CustomDrawer from './src/Components/CustomDrawerContent';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
