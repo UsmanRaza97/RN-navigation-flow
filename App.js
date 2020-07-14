@@ -1,92 +1,78 @@
-import * as React from 'react';
-import {View, Text, Button} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Article from './src/Components/ArticleScreen';
-import Feed from './src/Components/FeedScreen';
-import HomeScreen from './src/Components/HomeScreen';
-import DetailScreen from './src/Components/DetailScreen';
-import SignInScreen from './src/Components/SignIn';
-import SplashScreen from './src/Components/splashScreen';
-import CustomDrawer from './src/Components/CustomDrawerContent';
+// import * as React from 'react';
+// import {I18nManager, Text, View, StyleSheet} from 'react-native';
+// import I18n from './src/i18n/locales';
 
-const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
-const Tab = createStackNavigator();
-const AuthStack = createStackNavigator();
-const BottomTabStack = createBottomTabNavigator();
+// import {Picker, Icon} from 'native-base';
+// import {DropdownLanguage} from './src/DropdownLanguage';
 
-const tabScreen = () => {
-  return (
-    <Tab.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{headerShown: false}}
-      />
-    </Tab.Navigator>
-  );
-};
-const createStack = () => (
-  <Stack.Navigator>
-    <Stack.Screen
-      options={{
-        title: 'overview',
-        headerStyle: {
-          backgroundColor: '#f4511e',
-        },
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-        headerRight: () => (
-          <Button
-            onPress={() => alert('This is a button!')}
-            title="Info"
-            color="black"
-          />
-        ),
-      }}
-      name="Home"
-      component={tabScreen}
-    />
-    <Stack.Screen name="Detail" component={DetailScreen} />
-    <Stack.Screen name="SignIn" component={SignInScreen} />
-  </Stack.Navigator>
-);
-const bottomStack = () => (
-  <BottomTabStack.Navigator>
-    <BottomTabStack.Screen name="Feed" component={Feed} />
-    <BottomTabStack.Screen name="Artical" component={Article} />
-  </BottomTabStack.Navigator>
-);
+// export default class App extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       languageSelected: 'en',
+//     };
+//   }
+//   onChangeLanguage(languageSelected) {
+//     this.setState({
+//       languageSelected,
+//     });
+//     //this.props.setLanguageUser(value)
+//     I18n.locale = languageSelected;
+//     // _storeData(USER_LANGUAGE,value);
+//   }
+//   render() {
+//     console.log('props of App', this.props);
+//     const {languageSelected} = this.state;
+//     return (
+//       <View style={styles.container}>
+//         <DropdownLanguage
+//           language={languageSelected}
+//           onChangeLanguage={this.onChangeLanguage.bind(this)}
+//         />
+//         <Text style={styles.title}>{I18n.t('hompage.welcome')}</Text>
+//         <Text style={styles.paragraph}>{I18n.t('hompage.description')}</Text>
+//         <Text style={styles.paragraph}>{I18n.t('hompage.usman')}</Text>
+//       </View>
+//     );
+//   }
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     backgroundColor: '#ecf0f1',
+//     padding: 8,
+//   },
+//   title: {
+//     margin: 24,
+//     fontSize: 18,
+//     fontWeight: 'bold',
+//     textAlign: 'center',
+//   },
+//   dropdownLanguage: {
+//     width: 110,
+//     height: 50,
+//     position: 'absolute',
+//     top: 10,
+//     right: 10,
+//     flexDirection: 'row',
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+
+//   paragraph: {
+//     margin: 24,
+//     fontSize: 18,
+//     fontWeight: 'bold',
+//     textAlign: 'center',
+//   },
+// });
+import React from 'react';
+import Navigation from './src/navigation';
 const App = () => {
-  const [isLoading, setLoading] = React.useState(true);
-  const [userToker, setUserToken] = React.useState('asdf');
-  React.useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
-  if (isLoading) {
-    return <SplashScreen />;
-  }
-  return (
-    <NavigationContainer>
-      {userToker ? (
-        <Drawer.Navigator>
-          <Drawer.Screen name="Home" component={createStack} />
-          <Drawer.Screen name="Feed" component={Feed} />
-          <Drawer.Screen name="Article" component={Article} />
-        </Drawer.Navigator>
-      ) : (
-        <AuthStack.Navigator>
-          <AuthStack.Screen name="SignIn" component={SignInScreen} />
-        </AuthStack.Navigator>
-      )}
-    </NavigationContainer>
-  );
+  return <Navigation />;
 };
 
 export default App;
